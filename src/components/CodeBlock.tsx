@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react'; // useRefを追加
 
 interface CodeBlockProps {
   children?: React.ReactNode;
@@ -10,25 +10,12 @@ interface CodeBlockProps {
 
 export function CodeBlock({ children, className, ...props }: CodeBlockProps) {
   const [copied, setCopied] = useState(false);
-
-  const extractTextFromChildren = (node: React.ReactNode): string => {
-    if (typeof node === 'string') {
-      return node;
-    }
-    if (typeof node === 'number') {
-      return String(node);
-    }
-    if (Array.isArray(node)) {
-      return node.map(extractTextFromChildren).join('');
-    }
-    if (node && typeof node === 'object' && 'props' in node) {
-      return extractTextFromChildren((node as any).props.children);
-    }
-    return '';
-  };
+  const preRef = useRef<HTMLPreElement>(null); // preタグへの参照を作成
 
   const handleCopy = async () => {
-    const code = extractTextFromChildren(children);
+    // DOMから直接テキストを取得するため、複雑な構造でも見たままのコードが取れます
+    if (!preRef.current) return;
+    const code = preRef.current.textContent || '';
     
     try {
       await navigator.clipboard.writeText(code);
@@ -48,7 +35,8 @@ export function CodeBlock({ children, className, ...props }: CodeBlockProps) {
       >
         {copied ? '✓ コピーしました' : 'コピー'}
       </button>
-      <pre className={className} {...props}>
+      {/* refを割り当てる */}
+      <pre ref={preRef} className={className} {...props}>
         {children}
       </pre>
     </div>
