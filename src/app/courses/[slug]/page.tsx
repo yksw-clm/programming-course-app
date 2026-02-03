@@ -3,7 +3,7 @@ import { MDXRemote } from 'next-mdx-remote/rsc';
 import rehypePrettyCode from 'rehype-pretty-code';
 import Link from 'next/link';
 
-// カスタムコンポーネント（後述）
+// カスタムコンポーネント
 import { Callout } from '@/components/Callout';
 import { HtmlEditor } from '@/components/HtmlEditor';
 import { CodeBlock } from '@/components/CodeBlock';
@@ -33,9 +33,13 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
   const { prev, next } = getAdjacentPosts(slug);
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    // Mobile: 縦並び (flex-col), 最小高さ確保
+    // Desktop (lg以上): 横並び (flex-row), 画面固定 (h-screen overflow-hidden)
+    <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen lg:overflow-hidden">
       {/* 左側: 記事 */}
-      <article className="w-1/2 overflow-y-auto py-10 px-8 bg-white">
+      {/* Mobile: 幅100%, 高さ自動, 全体スクロールの一部 */}
+      {/* Desktop: 幅50%, 高さ100%, 内部スクロール */}
+      <article className="w-full lg:w-1/2 lg:overflow-y-auto py-6 px-4 md:py-10 md:px-8 bg-white">
         {/* 戻るリンク */}
         {prev && (
           <div className="mb-6">
@@ -51,11 +55,12 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
           </div>
         )}
 
-        <h1 className="text-3xl font-bold mb-4">{meta.title}</h1>
+        {/* フォントサイズをレスポンシブに調整 */}
+        <h1 className="text-2xl md:text-3xl font-bold mb-4">{meta.title}</h1>
         <p className="text-gray-500 mb-8">{meta.date}</p>
         
-        {/* 記事本文 */}
-        <div className="prose max-w-none">
+        {/* 記事本文: スマホでは文字サイズを少し小さめに調整 (prose-sm) */}
+        <div className="prose prose-sm md:prose-base max-w-none">
           <MDXRemote
             source={content}
             components={components}
@@ -69,7 +74,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
 
         {/* 進むリンク */}
         {next && (
-          <div className="mt-10 pt-6 border-t border-gray-200">
+          <div className="mt-10 pt-6 border-t border-gray-200 mb-8 lg:mb-0">
             <Link 
               href={`/courses/${next.slug}`}
               className="inline-flex items-center text-blue-600 hover:text-blue-800 transition-colors"
@@ -84,7 +89,9 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       </article>
 
       {/* 右側: プレビュー＆エディター */}
-      <div className="w-1/2 h-full">
+      {/* Mobile: 幅100%, 高さ固定(600px)で記事の下に配置 */}
+      {/* Desktop: 幅50%, 高さ100% */}
+      <div className="w-full lg:w-1/2 h-[600px] lg:h-full border-t lg:border-t-0 lg:border-l border-gray-200">
         <HtmlEditor />
       </div>
     </div>
