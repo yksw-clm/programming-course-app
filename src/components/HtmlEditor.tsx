@@ -1,16 +1,29 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { html } from '@codemirror/lang-html';
 
 export function HtmlEditor() {
   const [code, setCode] = useState(``);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
-  const [previewContent, setPreviewContent] = useState('');
-
+  // コードが変更されたら、0.5秒待ってからiframeを更新する（デバウンス処理）
+  // これにより、入力中のカクつきを防ぎ、無駄な更新を減らします
   useEffect(() => {
-    setPreviewContent(code);
+    const timer = setTimeout(() => {
+      if (iframeRef.current) {
+        const doc = iframeRef.current.contentDocument;
+        if (doc) {
+          doc.open();
+          doc.write(code);
+          doc.close();
+        }
+      }
+    }, 500); // 500ミリ秒 = 0.5秒
+
+    // 次の入力があったら前のタイマーをキャンセル
+    return () => clearTimeout(timer);
   }, [code]);
 
   return (
@@ -22,10 +35,12 @@ export function HtmlEditor() {
         </div>
         <div className="h-[calc(100%-40px)] bg-white overflow-auto">
           <iframe
-            srcDoc={previewContent}
+            ref={iframeRef}
             className="w-full h-full border-0"
             title="preview"
-            sandbox="allow-scripts"
+            // srcDocは使わず、JavaScriptから書き込みます
+            // allow-same-origin: これがないとJSから中身を書き換えられません
+            sandbox="allow-scripts allow-same-origin"
           />
         </div>
       </div>
