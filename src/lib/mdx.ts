@@ -26,3 +26,13 @@ export function getAllPosts() {
   // ファイル名順でソート
   return posts.sort((post1, post2) => (post1.slug > post2.slug ? 1 : -1));
 }
+
+export function getAdjacentPosts(currentSlug: string) {
+  const allPosts = getAllPosts();
+  const currentIndex = allPosts.findIndex((post) => post.slug === currentSlug);
+
+  return {
+    prev: currentIndex > 0 ? allPosts[currentIndex - 1] : null,
+    next: currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null,
+  };
+}
