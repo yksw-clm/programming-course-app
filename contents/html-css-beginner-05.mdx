@@ -1,0 +1,149 @@
+---
+title: "第5回: 「余白」を使いこなしてプロ級デザインに！"
+date: "2026-02-08"
+description: "デザインがなんとなく素人っぽい…その原因は「余白」にあります。PaddingとMarginを使い分けて、見やすいレイアウトを作りましょう。"
+course: "HTML + CSS初級編"
+courseSlug: "html-css-beginner"
+episode: 5
+---
+
+## はじめに
+
+前回は、枠線をつけて「カード」を作りました。
+でも、文字が枠線にくっついていたり、行と行が狭かったりして、少し読みづらくなかったですか？
+
+実は、プロのデザインが綺麗に見える一番の秘密は「余白（スペース）」の取り方にあるんです。
+
+今日は、CSSの中でも特に重要な **Padding（パディング）** と **Margin（マージン）** という2つの余白をマスターしましょう！
+
+---
+
+## 📦 1. 内側の余白：Padding（パディング）
+
+まずは、箱の「内側」を広げる **Padding** です。
+
+前回のカードを思い出してください。枠線と文字がくっついていましたよね。
+これを解消するために使います。
+
+```html
+<div style="border: 2px solid red;">
+  余白なし（キツキツ）
+</div>
+
+<div style="border: 2px solid blue; 
+            padding: 20px;">
+  余白あり（ゆったり）
+</div>
+
+```
+
+<Callout type="info">
+青い枠の方を見てください。文字の周りにスペースができて、箱自体も少し大きくなりましたね？
+これが **Padding** です。
+</Callout>
+
+### イメージは「プチプチ」
+
+宅配便のダンボールを想像してください 📦
+中身（文字）が壊れないように、周りに詰める「緩衝材（プチプチ）」がPaddingです。
+詰めれば詰めるほど、箱（枠線や背景色）は大きくなります。
+
+---
+
+## ↔️ 2. 外側の余白：Margin（マージン）
+
+次は、箱と箱の「間」を空ける **Margin** です。
+
+要素同士がくっつきすぎているときに使います。
+
+```html
+<button>ボタン1</button>
+<button>ボタン2</button>
+
+<div style="margin-top: 30px;">
+  <button style="margin-right: 20px;">離れたボタン1</button>
+  <button>離れたボタン2</button>
+</div>
+
+```
+
+### イメージは「ソーシャルディスタンス」
+
+人と人がぶつからないように取る「距離」がMarginです 🚶 ↔️ 🚶
+Paddingと違って、背景色や枠線は広がりません。単に「見えないバリア」を張る感じです。
+
+---
+
+## 📐 使い分けのコツ
+
+どっちを使えばいいか迷ったら、こう考えましょう！
+
+* **背景色や枠線の中**を広げたいとき 👉 **Padding**
+* **隣の要素との距離**を離したいとき 👉 **Margin**
+
+### 方向を指定しよう
+
+余白は、上下左右個別に指定することもできます。
+
+* **padding-top** （上）
+* **padding-bottom** （下）
+* **padding-left** （左）
+* **padding-right** （右）
+* **margin-top** （上）...など
+
+```html
+<h2 style="border-bottom: 1px solid gray; padding-bottom: 10px;">
+  下線付きの見出し
+</h2>
+```
+
+---
+
+## 🧑‍💻 今日のミッション：プロフィールカードを完成させる
+
+それでは、前回の「窮屈だったプロフィールカード」に余白を入れて、見やすくリフォームしましょう！
+
+**修正ポイント:**
+
+1. カード全体（**div**）の内側に **padding** を入れる
+2. 画像（**img**）の下に **margin** を入れて、名前との間を空ける
+3. リスト（**li**）の下に `margin` を入れて、行間を広げる
+
+```html
+<div style="border: 4px solid skyblue; border-radius: 20px; text-align: center; padding: 30px;">
+  <h1 style="background-color: skyblue; color: white; padding: 10px;">
+    My Profile
+  </h1>
+
+  <img 
+    src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80" 
+    style="border-radius: 50%; margin-bottom: 20px;"
+  />
+  
+  <p>はじめまして！余白をマスターしてレベルアップしました。</p>
+
+  <h2 style="color: skyblue; margin-top: 30px;">好きなこと</h2>
+  
+  <ul style="text-align: left;">
+    <li style="margin-bottom: 10px;">カフェ巡り</li> <li style="margin-bottom: 10px;">プログラミング</li>
+    <li>寝ること</li>
+  </ul>
+</div>
+```
+
+プレビューを見てみてください。
+第4回のときと比べて、驚くほど「プロっぽい」見た目になっていませんか？✨
+これが余白の魔法です！
+
+---
+
+## 次回予告
+
+お疲れ様でした！
+これで、HTMLとCSSの基本的な道具（タグ、色、枠線、余白）はすべて手に入れました。
+
+次回はいよいよ**最終回（第6回）です。
+これまで習った技術を総動員して、
+「ヘッダー」や「フッター」もある、本格的なWebページ全体のレイアウト**を作って卒業制作としましょう！
+
+お楽しみに！

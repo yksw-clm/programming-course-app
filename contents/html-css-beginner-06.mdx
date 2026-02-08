@@ -1,0 +1,182 @@
+---
+title: "第6回: ついに完成！Webサイトの全体像を作ろう"
+date: "2026-02-08"
+description: "初級編の最終回です。ヘッダーやフッターをつけて、今まで作ったパーツをひとつの「Webサイト」として完成させましょう！"
+course: "HTML + CSS初級編"
+courseSlug: "html-css-beginner"
+episode: 6
+---
+
+## はじめに
+
+ついに最終回です！ここまで本当によく頑張りましたね 👏
+
+前回までに、箱を作ったり（div）、余白を調整したり（margin/padding）して、きれいな「プロフィールカード」が作れるようになりました。
+
+でも、今のままだと「白い画面にカードがポツンとあるだけ」ですよね。
+世の中にあるWebサイトを思い出してみてください。
+上にはメニュー（ヘッダー）があり、下には著作権表示（フッター）がありませんか？
+
+今回は、それらを追加して、**「どこに出しても恥ずかしくないWebページ」**を完成させて卒業しましょう！
+
+---
+
+## 🏗️ Webサイトの「3点セット」
+
+多くのWebサイトは、大きく分けて3つの部分でできています。
+人間の体に例えるとわかりやすいですよ。
+
+1. **ヘッダー（Header）**: 「頭」の部分。
+   サイトのタイトルやロゴがある、一番目立つ看板です。
+2. **メイン（Main）**: 「胴体」の部分。
+   ここに記事やプロフィールなど、一番見せたい中身が入ります。
+3. **フッター（Footer）**: 「足」の部分。
+   サイトの終わりを示す部分です。「© 2026 ...」などが書いてあります。
+
+この3つを順番に並べるだけで、一気に「サイトっぽく」なるんです！✨
+
+---
+
+## 🎩 ヘッダーとフッターを作ろう
+
+実は、HTMLには **\<div\>** と同じように使える、特別な名前のタグが用意されています。
+
+- **\<header\>**: ヘッダーを作るための箱
+- **\<footer\>**: フッターを作るための箱
+
+機能は **\<div\>** と全く同じですが、「ここはヘッダーだよ！」とコンピュータに分かりやすく伝えるために使います。
+
+### コードを書いてみよう
+
+まずはヘッダーとフッターだけを作ってみましょう。
+以下のコードを試してみてください。
+
+```html
+<header style="background-color: #333; color: white; padding: 15px;">
+  <h1 style="font-size: 20px; margin: 0;">My Portfolio</h1>
+</header>
+
+<div style="padding: 50px; text-align: center;">
+  <p>ここにプロフィールが入ります</p>
+</div>
+
+<footer style="background-color: #333; color: white; padding: 10px; text-align: center;">
+  <p style="font-size: 12px; margin: 0;">© 2026 Takuma Honda</p>
+</footer>
+```
+
+<Callout type="info">
+上下に黒い帯ができましたか？
+これがあるだけで、画面が「キリッ」と引き締まりますよね！
+</Callout>
+
+---
+
+## 🎨 全体の背景色を変えてみよう
+
+今は背景が真っ白なので、前回作った「白いプロフィールカード」を置いても目立ちません。
+テーブルクロスを敷くように、**ページ全体の背景色**を少しグレーにしてみましょう。
+
+全体を包む大きな **\<div\>** を作って、色をつけます。
+
+```html
+<div style="background-color: #f0f2f5; font-family: sans-serif;">
+  
+</div>
+```
+
+---
+
+## 🎓 卒業制作：プロフィールサイト完成！
+
+さあ、これが初級編の集大成です！
+以下の手順でコードを組み立てて、あなただけのWebサイトを完成させてください。
+
+**構成:**
+
+1. **全体を包む箱**: 背景色を薄いグレーにする
+2. **ヘッダー**: タイトルを表示
+3. **メイン**: 前回作った「プロフィールカード」をここに配置（背景は白！）
+4. **フッター**: コピーライトを表示
+
+**完成コードの例:**
+
+```html
+<div style="background-color: #f0f2f5; padding-bottom: 20px;">
+
+  <header style="background-color: teal; color: white; padding: 15px; text-align: center;">
+    <h1 style="margin: 0; font-size: 24px;">My Profile Site</h1>
+  </header>
+
+  <div style="padding: 20px;">
+    
+    <div style="background-color: white; /* カードを白くする */
+                border-radius: 20px; 
+                text-align: center;
+                padding: 30px;
+                max-width: 400px; /* 横幅が広がりすぎないように制限 */
+                margin: 0 auto;   /* 画面の真ん中に置く魔法 */
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* 影をつけて浮き上がらせる */">
+
+      <h2 style="color: teal;">My Profile</h2>
+
+      <img 
+        src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=300&q=80" 
+        style="border-radius: 50%; width: 150px; height: 150px; object-fit: cover; margin-bottom: 20px;" 
+      />
+
+      <p>HTMLとCSSを勉強して、Webサイトが作れるようになりました！</p>
+      
+      <div style="text-align: left; margin-top: 30px;">
+        <h3 style="border-bottom: 2px solid teal; padding-bottom: 5px;">Skills</h3>
+        <ul>
+          <li>HTML / CSS</li>
+          <li>Box Model</li>
+          <li>Layout Design</li>
+        </ul>
+      </div>
+
+    </div>
+    </div>
+
+  <footer style="text-align: center; color: gray; font-size: 12px; margin-top: 20px;">
+    <p>© 2026 Takuma Honda. All Rights Reserved.</p>
+  </footer>
+
+</div>
+
+```
+
+<Callout type="warning">
+**新しい魔法が登場しました 🪄**
+**`margin: 0 auto;`** … これをカード（widthが決まっている要素）に指定すると、なんと**自動的に左右の余白を計算して、真ん中に配置**してくれます！
+Web制作で一番使うテクニックの一つです。
+</Callout>
+
+---
+
+## 🎉 初級編、完走おめでとうございます！
+
+プレビューを見てください。
+そこにあるのは、紛れもなく「あなたがコードを書いて作ったWebサイト」です。
+
+第1回では文字を表示するだけでしたが、今ではレイアウトを組み、色を操り、写真を見やすく配置できるようになりました。
+これは本当にすごいことです！👏
+
+**このコースで学んだこと:**
+
+1. HTMLタグでの文書作成
+2. 画像やリストの表示
+3. CSSによる文字や背景の装飾
+4. 枠線（Border）と箱（Div）の概念
+5. 余白（Margin/Padding）によるレイアウト
+6. ヘッダー・フッターを含むページ構成
+
+この基礎があれば、ブログのデザインを変えたり、簡単なランディングページを作ったりすることも夢ではありません。
+
+### 次の冒険へ
+
+もし「もっとボタンを押した時に動くようにしたい！」と思ったら、次はプログラミング言語 「JavaScript（ジャバスクリプト）」 の世界が待っています。
+
+ですが今はまず、自分で作ったこのWebサイトを眺めて、達成感を味わってください。
+本当にお疲れ様でした！！
